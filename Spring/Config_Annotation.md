@@ -2,7 +2,7 @@
 ##설정 방법
 - Configuration 파일에 @Configuration Annotation 추가 
 - 모든 Method에 @Bean Annotation을 달아줘서 Spring Container에 등록
-- Spring Container에서 Bean을 꺼내야 할 피요가 있는 Class : Spring은 ApplicationContext부터 시작 이게 Spring Container이다.
+- Spring Container에서 Bean을 꺼내야 할 필요가 있는 Class : Spring은 ApplicationContext부터 시작 이게 Spring Container이다.
 - ApplicationContext ac = new AnnotationConfigApplicationContext({AppConfig}.class)
 - AppConfig.class 라는 구성정보를 Spring Container에 지정 Container안에 Bean들이 등록된다.
 - MemberService memberservice = ac.getBean("memberService", MemberService.class)
@@ -17,3 +17,12 @@
 - 원래 Spring은 Bean을 생성하고, 의존관계를 주입하는 단계가 나누어져 있다.
 
 ##BeanFactory vs ApplicationContext
+- ApplicationContext는 BeanFactory를 상속 받는다.
+- ApplicationContext는 BeanFactory가 주는 기능과 다른 부가 기능을 제공한다. 따라서 Memory를 극단적으로 줄여야 하는 상황이 아니하면 ApplicationContext를 쓰자
+- 더 디테일한 내용은 https://beststar-1.tistory.com/39 참고하자
+
+##@Configuration과 Singleton
+- AppConfig를 보면 memberRepository와 같이 중복되는게 생길 거 같은데 완벽히 Singleton을 보장함
+- Why? : @Configuration Annotation을 쓰면 CGLIB로 Bytecode 조작을 통해 한 번 생성된 같은 객체를 중복 생성을 하지 않게 설계되어있다.
+- 따라서 @Configuration없이 @Bean만 쓰면 같은 객체가 여러개 생성되어 Singleton을 보장하지 않는다.
+

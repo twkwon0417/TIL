@@ -7,3 +7,11 @@
 ##TIP
 - //given, //when, //then 꼴로 형식 맞추면 편할 듯
 - cmd + shift + t 단축키로 Test만들기 Short Cut 가능
+- Junit5부터 public을 쓸 필요가 없다. 
+
+##여러 Method들
+- assertThat().{isInstanceOf, isEqualTo, etc...} : 같은지 확인하기
+- assertThrows(튀어나올 Exception, {하는 행위})
+#### isSameAs VS isEqualTo
+- isSameAs() : Java에서의 == 인스턴스를 비교
+- isEqualTo : Java에서의 Equals랑 같음 (그 Overriding해서 쓰는거 있잖아)
