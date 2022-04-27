@@ -1,4 +1,4 @@
-#XML 파일로 AppConfig 파일 설정하기
+# XML 파일로 AppConfig 파일 설정하기
 - 기존 Java 코드로 설정하는 것과 다르지 않다. (1대 1 매핑 등등)
 - ~~~java
   ApplicationContext ac = new GenericXMLApplicationContext({Configuration.XML})

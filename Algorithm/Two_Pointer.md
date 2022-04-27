@@ -1,4 +1,4 @@
-#Two Pointer Algorithm
+# Two Pointer Algorithm
 - Brute Force로 n<sup>2</sup> 걸기는 것을 n 안에 해결 할수 있게 해줌
 - 배열에 Pointer 2개를 쓴다.
 - 배열을 정렬한 다음에 left, right Pointer을 만들어 두 포인터 위치한 값의 합과 우리가 원하는 값을 비교해서 왼쪽 또는 오른쪽 포인터를 조정해서 우리가 원하는 값을 찾는거와 같이 활용할 수도 있고

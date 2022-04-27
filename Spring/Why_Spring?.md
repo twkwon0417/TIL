@@ -1,4 +1,4 @@
-#Spring은 객체 지향적 설계를 쉽게 하기 위해서 만들어진 Framework
+# Spring은 객체 지향적 설계를 쉽게 하기 위해서 만들어진 Framework
 - 모든 설계에 역활과 구현을 분리하 -> 유연하게 개발(변경) 가능
 - OCP, DIP 등등을 DI, IoC 등등으로 쉽게 해결 가능
 - 설계 할 때 AppConfig와 같은 Configuration파일을 따로 만들지 않으면 DIP, OCP와 같은 객체 지향이지 못하게 된다
