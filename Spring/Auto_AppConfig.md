@@ -1,5 +1,6 @@
 # 설정코드 없이 Spring Setting 하기
 ## Component Scan
+- Spring(ApplicationContext)가 있어야 Component Scan이 작동한다. ApplicationContext가 본인의 스프링 컨테이너에 등록할 빈을 찾으려고 ComponentScan을 실행하는 느낌~
 - @Component가 붙은 클래스를 찾아 다 Spring Bean을 등록 시킨다.
 - @Component, @Controlloer, @Service, @Repository, @Configuration Annotation도 CompoentScan 된다. 각 Annotation 열어보면 @Component를 포함하고 있다.
 - Spring Bean의 기본 이름은 앞글자만 소문자인 클래스명
@@ -18,9 +19,13 @@
 - 생성자에 @Autowired를 지정하면, 스프링 컨테이너가 자동으로 의존관계를 주입 해준다.
 - Default는 타입이 같은 빈을 주입한다. (getBean(MemberRepository.class)와 비슷)
 - @Autowired Annotation은 주입할 대상이 없으면 오류가 발생, Argument를 required = false로 해서 동작하게 할 수도 있다. 
+#### 옵션 처리
+- @Autowired(required = false) : 주입할 대상이 없으면 수정자 메서드 자체가 호출 되지 않는다. 
+- Parameter 앞에 @Nullable : 주입할 대상이 없으면 null
+- Parameter Optional<Object> 사용 : 주입할 대상이 없으면 Optional.empty
 
 ## Setting
 - AnnotationConfigApplicationContext를 똑같이 사용 (AutoAppConfig.class 넘겨주자)
 - AutoAppConfig와 같이 설정 파일에 @Configuration, @ComponentScan Annotation 붙이기
 
-/// 생성자 주입 : 새로운 객체를 만들때 생성자가 호출되어야 하니 빈 등록할때 주입이 자동으로 일어나게 된다.
+https://www.inflearn.com/questions/124234

@@ -3,6 +3,7 @@
 - Configuration 파일에 @Configuration Annotation 추가 
 - 모든 Method에 @Bean Annotation을 달아줘서 Spring Container에 등록
 - Spring Container에서 Bean을 꺼내야 할 필요가 있는 Class : Spring은 ApplicationContext부터 시작 이게 Spring Container이다.
+- SpringBoot Project를 할때는 @SpringBootApplication에서 제공하는 컨테이너를 사용해야 한다.
 - ApplicationContext ac = new AnnotationConfigApplicationContext({AppConfig}.class)
 - AppConfig.class 라는 구성정보를 Spring Container에 지정 Container안에 Bean들이 등록된다.
 - MemberService memberservice = ac.getBean("memberService", MemberService.class)
@@ -15,6 +16,7 @@
 - Bean 이름들은 모두 달라야 한다. 아니면 오류 뜬다.
 - 이러한 방식(자바 코드로 스프링 빈을 등록하는)으로 빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다.
 - 원래 Spring은 Bean을 생성하고, 의존관계를 주입하는 단계가 나누어져 있다.
+- @bean 으로 등록된 bean의 default name은 method name이다.
 
 ## BeanFactory vs ApplicationContext
 - ApplicationContext는 BeanFactory를 상속 받는다.
