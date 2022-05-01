@@ -19,10 +19,31 @@
 - 생성자에 @Autowired를 지정하면, 스프링 컨테이너가 자동으로 의존관계를 주입 해준다.
 - Default는 타입이 같은 빈을 주입한다. (getBean(MemberRepository.class)와 비슷)
 - @Autowired Annotation은 주입할 대상이 없으면 오류가 발생, Argument를 required = false로 해서 동작하게 할 수도 있다. 
+- Type으로 찾고 주입한다. 
 #### 옵션 처리
 - @Autowired(required = false) : 주입할 대상이 없으면 수정자 메서드 자체가 호출 되지 않는다. 
 - Parameter 앞에 @Nullable : 주입할 대상이 없으면 null
 - Parameter Optional<Object> 사용 : 주입할 대상이 없으면 Optional.empty
+
+#### 같은 Type이 여러개인 경우
+- 하위 타입(구체 타입)으로 지정하면 해결되나 DIP를 위반하고 유연성이 떨어진다.
+
+##### @Autowired Field명 으로 매칭
+- 같은 Type의 Bean이 여러개 있는게 확인되면 Field, Parameter 이름을 Bean이름과 매칭시킨다. 
+##### @Qualifier 사용
+- 추가 구분자로 Bean을 등록할때 @Qualifier("{원하는 이름}") Annotation을 추가로 붙여 준다.
+- 주입시에도 @Quailifier("{원하는 이름}") Annotation을 붙여준다.
+- 못 찾으면 NoSuchBeanDefinitionException 예외 발생
+- 주입시 추가적인 옵션을 제공하는 것이지 Bean 이름을 변경하는 것은 아니다.
+
+##### @Primary 사용
+- Bean이 등록되는 곳에 @Primary Annotation을 붙인다.
+- @Autowired 시에 여러 빈이 매칭되면 @Primary가 우선권을 가진다.
+
+## @Primary vs @Qualifier
+- 자주 쓰이는 Bean같은 경우에는 @Primary를 붙여 사용하고 
+- 덜 쓰이거나 테스트 용도로 사용되는 건 @Qualifer을 적용시켜 명시적으로 획득하는 방식을 사용하면 좋다.
+- Spring은 자동보다는 수동이, 넓은 범위의 선택권 보다는 좁은 범위의 선택권이 우선 순위가 높다. 따라서 @Qualifier이 우선순위를 가진다.
 
 ## Setting
 - AnnotationConfigApplicationContext를 똑같이 사용 (AutoAppConfig.class 넘겨주자)
