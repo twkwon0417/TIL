@@ -16,7 +16,7 @@
 
 #### `<em>, <i>`
 - emphasis와 bold tag이다.
-- `<strong>`와 같이 `<em>은 강조하는 걸로 처리된다.
+- `<strong>`와 같이 `<em>`은 강조하는 걸로 처리된다.
 
 #### `<ol>, <li>`
 - ordered list와 list의 줄임이다. 순서 있는 목록을 만들 때 사용
