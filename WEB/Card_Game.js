@@ -32,4 +32,4 @@ document.getElementById("second").appendChild(c);
 // addCard(4);
 // addCard(5);
 
-https://study-zone.tistory.com/14
+//https://study-zone.tistory.com/14
