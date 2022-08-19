@@ -1,0 +1,13 @@
+.card {
+  background-color: blue;
+  width: 20px;
+  height: 30px;
+  color: red;
+  text-align: center;
+  line-height: 30px;
+  margin: 2px;
+  display: inline-block;
+  position: relative;
+  border-style: solid;
+  border-color: green;
+}
