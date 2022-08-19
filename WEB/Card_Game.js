@@ -3,6 +3,7 @@ function Game(side, time) { // 게임
 	let ans;
 	
 	initializeCards(cardsArray);
+  displayFullCards(side, cardsArray);
 	
 	while(ans == side * side / 2) {
 		// let row1 = 
@@ -17,29 +18,33 @@ function Game(side, time) { // 게임
 }
 
 function twoDArray(row, col) { //JS는 이차원 객체를 한번에 만들수 없어서 만든 함수
-	let output = new array();
-	
-	for(let i = 0; i < row; i++) {
-		output.append(new array(col));
-	}
+	let output = new Array(row * col);
 	
 	return output;
 }
 
+function shuffleArray(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
 function initializeCards(array) { // 게임 시스템 함수로써 가상 카드(배열)
-	let numOfCards = array.length * array.length;
+	let numOfCards = array.length;
 	let assign = 1;
 	
 	for(let i = 0; i < numOfCards; i += 2) {
+    console.log(i);
 		array[i] = assign;
 		array[i + 1] = assign;
+    assign++;
 	}
 	
-	shuffle(array);
+	shuffleArray(array);
+  console.log(array);
 }
 
 function checkAns (array, row1, col1, row2, col2) {
-	if(array[row1][col1] == array[row2][col2]) {
+  side = Math.sqrt(array.length);
+	if(array[row1 * side + col1] == array[row2 * side + col2]) {
 		// document의 클릭된 노드를 가져와서 삭제 시킨다.
 	} else {
 		// 선택된 항목을 다시 뒤집는 함수
@@ -54,24 +59,16 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   let className = document.createAttribute("class");
   className.value = "card";
   cardBorder.setAttributeNode(className);
-
-  cardBorder.style.backgroundColor = "blue";
-  cardBorder.style.width = "20px";
-  cardBorder.style.height = "30px";
-  cardBorder.style.color = "red";
-  cardBorder.style.textAlign = "center";
-  cardBorder.style.lineHeight = "30px";
-  cardBorder.style.margin = "2px"
   
   let cardValue = document.createTextNode(number);
   cardBorder.appendChild(cardValue);
+  
+  cardBorder.addEventListener('click', function() {console.log("Hi")})
   
   return cardBorder;
 }
 
 function displayColCard(card) { // 화면에 띄울 카드배열의 행을 담당
-	card.style.display = "inline-block";
-	card.style.position = "relative";
 	document.getElementsByTagName("body")[0].appendChild(card);
 }
 
@@ -81,15 +78,20 @@ function displayRowCard() { // 화면에 띄울 카드배열의 렬을 담당
 	document.getElementsByTagName("body")[0].appendChild(div);
 }
 
-function displayFullCard(side) { // 위 두 함수를 이용해서 카드배열을 직접적으로 띄우는 함수
+function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서 카드배열을 직접적으로 띄우는 함수
 	for(let i = 0; i < side; i++) {
 		for(let j = 0; j < side; j++) {
-			let thing = addCard(i * side + j + 1);
+			let thing = addCard(assignTable[i * side + j]);
 			displayColCard(thing);
 		}
 		displayRowCard();
 	}
 }
 
-dispalyFullCard(6);
 
+function flipCard() {
+  
+}
+
+
+Game(6, 1);
