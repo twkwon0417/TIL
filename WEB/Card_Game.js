@@ -1,3 +1,4 @@
+let clickedArray = new Array();
 
 function Game(side, time) { // 게임
 	let cardsArray = twoDArray(side, side);
@@ -46,7 +47,11 @@ function initializeCards(array) { // 게임 시스템 함수로써 가상 카드
 
 function checkAns (clickedArray) {
   if(clickedArray[0] == clickedArray[1]) {
-    
+    let cardClass = clickedArray[0];
+    let toBeDeleted = document.getElementsByClassName(cardClass);
+    for(let i = 0; i < 2; i++) {
+      toBeDelected[i].parentNode.removeChild(toBeDelected[i])
+    }
   } else {
     // 그냥 다시 뒤집기
   }
@@ -56,7 +61,7 @@ function checkAns (clickedArray) {
 function flipCard(cardID, clickedArray) {
   if(Array.isArray(clickedArray)) {
     let length = clickedArray.push(cardID);
-    
+      
     if(length == 2) {
       checkAns(clickedArray);
     }
@@ -71,10 +76,20 @@ function flipCard(cardID, clickedArray) {
 function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적혀있는 카드 DOM을 배출
   let cardBorder = document.createElement("div");
   let className = document.createAttribute("class");
-  className.value = "card";
+  className.value = number;
   cardBorder.setAttributeNode(className);
-  let cardID = document.createAttribute("id");
-  cardID.value = number;
+  
+  cardBorder.style.backgroundColor = "blue";
+  cardBorder.style.width = "20px";
+  cardBorder.style.height = "30px";
+  cardBorder.style.color = "red";
+  cardBorder.style.textAlign = "center";
+  cardBorder.style.lineHeight = "30px";
+  cardBorder.style.margin = "2px";
+  cardBorder.style.display = "inline-block";
+  cardBorder.style.position = "reative";
+  cardBorder.style.borderStyle = "solid";
+  cardBorder.style.borderColor = "green";
   
   let cardValue = document.createTextNode(number);
   cardBorder.appendChild(cardValue);
