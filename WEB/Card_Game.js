@@ -1,21 +1,16 @@
 let clickedArray = new Array();
-
+let ans = 0;
 function Game(side, time) { // 게임
 	let cardsArray = twoDArray(side, side);
-	let ans;
 	
 	initializeCards(cardsArray);
   displayFullCards(side, cardsArray);
-	
-	while(ans == side * side / 2) {
-		// let row1 = 
-		// let col1 = 
-		// let row2 = 
-		// let col2 = 
-		// 선택된 요소의 배열 row col 값을 저장
-		// ans를 크게 해서 무한 루프에 빠지지 않도록 처리
-	}
-	
+	while(true) {
+    if(ans == side * side / 2) {
+      console.log("done");
+      break;
+    }
+  }
 	// 성공! 띄우던가 말던가
 }
 
@@ -46,6 +41,7 @@ function initializeCards(array) { // 게임 시스템 함수로써 가상 카드
 
 function checkAns () {
   if(clickedArray[0] == clickedArray[1]) {
+    ans++
     let cardClass = clickedArray[0];
     let toBeDeleted = document.getElementsByClassName(cardClass);
     for(let i = 0; i < 2; i++) {
@@ -113,4 +109,4 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 }
 
 
-Game(6, 1);
+Game(2, 1);
