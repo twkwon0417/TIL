@@ -3,7 +3,6 @@ let clickedArray = new Array();
 function Game(side, time) { // 게임
 	let cardsArray = twoDArray(side, side);
 	let ans;
-  let clickedArray = new Array();
 	
 	initializeCards(cardsArray);
   displayFullCards(side, cardsArray);
@@ -45,29 +44,18 @@ function initializeCards(array) { // 게임 시스템 함수로써 가상 카드
   console.log(array);
 }
 
-function checkAns (clickedArray) {
+function checkAns () {
   if(clickedArray[0] == clickedArray[1]) {
     let cardClass = clickedArray[0];
     let toBeDeleted = document.getElementsByClassName(cardClass);
     for(let i = 0; i < 2; i++) {
-      toBeDelected[i].parentNode.removeChild(toBeDelected[i])
+      toBeDeleted[i].style.visibility = "hidden";
+      clickedArray.pop();
     }
+    
   } else {
     // 그냥 다시 뒤집기
-  }
-  
-}
-
-function flipCard(cardID, clickedArray) {
-  if(Array.isArray(clickedArray)) {
-    let length = clickedArray.push(cardID);
-      
-    if(length == 2) {
-      checkAns(clickedArray);
-    }
-  }
-  
-  
+  }  
 }
 
 // ** 참고 **
@@ -94,7 +82,12 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   let cardValue = document.createTextNode(number);
   cardBorder.appendChild(cardValue);
   
-  cardBorder.addEventListener('click', flipCard(number))  // flipCard()는 화면에 띄워지는게 아님
+  cardBorder.addEventListener('click', function() {
+    clickedArray.push(number);
+    if(clickedArray.length == 2) {
+      checkAns();
+    }
+  })  // flipCard()는 화면에 띄워지는게 아님
   
   return cardBorder;
 }
