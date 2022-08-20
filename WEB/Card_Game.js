@@ -1,11 +1,14 @@
 let clickedArray = new Array();
 let ans = 0;
 let x = 0;
+
+
 function Game(side, time) { // 게임
 	let cardsArray = twoDArray(side, side);
 	x = side;
 	initializeCards(cardsArray);
   displayFullCards(side, cardsArray);
+  flipBackAll(time);
 }
 
 function twoDArray(row, col) { //JS는 이차원 객체를 한번에 만들수 없어서 만든 함수
@@ -44,12 +47,13 @@ function checkAns () {
     }
     if(ans == x * x / 2) {
       console.log("Done");
-    }
+    } 
   } else {
-    // 그냥 다시 뒤집기
-  }  
+    flipBack();
+    clickedArray.pop();
+    clickedArray.pop();
+  }
 }
-
 // ** 참고 **
 // 화면 띄우는 함수들 시작
 
@@ -75,6 +79,7 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   cardBorder.appendChild(cardValue);
   
   cardBorder.addEventListener('click', function() {
+    flipFront();
     clickedArray.push(number);
     if(clickedArray.length == 2) {
       checkAns();
@@ -104,5 +109,16 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 	}
 }
 
+function flipBack() {
+  
+}
 
-Game(2, 1);
+function flipFront() {
+  
+}
+
+function flipBackAll(second) {
+  
+}
+
+Game(3, 1);
