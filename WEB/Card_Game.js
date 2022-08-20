@@ -1,17 +1,11 @@
 let clickedArray = new Array();
 let ans = 0;
+let x = 0;
 function Game(side, time) { // 게임
 	let cardsArray = twoDArray(side, side);
-	
+	x = side;
 	initializeCards(cardsArray);
   displayFullCards(side, cardsArray);
-	while(true) {
-    if(ans == side * side / 2) {
-      console.log("done");
-      break;
-    }
-  }
-	// 성공! 띄우던가 말던가
 }
 
 function twoDArray(row, col) { //JS는 이차원 객체를 한번에 만들수 없어서 만든 함수
@@ -48,7 +42,9 @@ function checkAns () {
       toBeDeleted[i].style.visibility = "hidden";
       clickedArray.pop();
     }
-    
+    if(ans == x * x / 2) {
+      console.log("Done");
+    }
   } else {
     // 그냥 다시 뒤집기
   }  
