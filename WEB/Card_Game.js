@@ -8,7 +8,6 @@ function Game(side, time) { // 게임
 	x = side;
 	initializeCards(cardsArray);
   displayFullCards(side, cardsArray);
-  flipBackAll(time);
 }
 
 function twoDArray(row, col) { //JS는 이차원 객체를 한번에 만들수 없어서 만든 함수
@@ -78,11 +77,15 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   let cardValue = document.createTextNode(number);
   cardBorder.appendChild(cardValue);
   
+  cardBorder.style.animationDuration = "6s";      //
+  cardBorder.style.animationName = "cardBack";            //
+  cardBorder.style.animationFillMode = "forwards";//
+  
   cardBorder.addEventListener('click', function(event) {
     let clickedCard = event.currentTarget;
     
     clickedCard.style.animationDuration = "1s";
-    clickedCard.style.animationName = "cardBack";
+    clickedCard.style.animationName = "cardFront";
     clickedCard.style.animationFillMode = "forwards";
     clickedArray.push(number);
     if(clickedArray.length == 2) {
@@ -94,13 +97,13 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
 }
 
 function displayColCard(card) { // 화면에 띄울 카드배열의 행을 담당
-	document.getElementsByTagName("body")[0].appendChild(card);
+	document.getElementById("gameBoard").appendChild(card);
 }
 
 function displayRowCard() { // 화면에 띄울 카드배열의 렬을 담당
 	let div = document.createElement("div");
 	div.style.height = "1px";
-	document.getElementsByTagName("body")[0].appendChild(div);
+	document.getElementById("gameBoard").appendChild(div);
 }
 
 function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서 카드배열을 직접적으로 띄우는 함수
@@ -113,21 +116,17 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 	}
 }
 
-// function flipBack(cardClassNumber) {
-//   let cardClass = '.' + cardClassNumber;
-//   console.log(cardClass);  //
-//   let toBeFlipped = document.getElementsByClassName(cardClass);
-//   console.log(toBeFlipped[0]);
+function flipBack(cardClassNumber) {
+  let cardClass = '.' + cardClassNumber;
+  console.log(cardClass);  //
+  let toBeFlipped = document.getElementsByClassName(cardClass);
+  console.log(toBeFlipped[0]);
 
-//   toBeFlipped[0].style.animationName = "cardBack";
-//   toBeFlipped[0].style.aniamtionDuration = "1s";
+  toBeFlipped[0].style.animationName = "cardBack";  //toBeFlipped[0]가 undefined인 오류 발생
+  toBeFlipped[0].style.aniamtionDuration = "1s";
 }
 
 function flipFront() {
-  
-}
-
-function flipBackAll(second) {
   
 }
 
