@@ -36,12 +36,15 @@ function initializeCards(array) { // 게임 시스템 함수로써 가상 카드
 }
 
 function checkAns () {
-  if(clickedArray[0] == clickedArray[1]) {
+  setTimeout(function() {
+    if(clickedArray[0] == clickedArray[1]) {
     ans++
     let cardClass = clickedArray[0];
     let toBeDeleted = document.getElementsByClassName(cardClass);
     for(let i = 0; i < 2; i++) {
-      toBeDeleted[i].style.visibility = "hidden";
+      toBeDeleted[i].style.animationName = "fadeOut";
+      toBeDeleted[i].style.animationDuration = "1s";
+      toBeDeleted[i].style.animationFillMode = "forwards";
       clickedArray.pop();
     }
     if(ans == x * x / 2) {
@@ -49,9 +52,12 @@ function checkAns () {
     } 
   } else {
     flipBack(clickedArray[0]);
+    flipBack(clickedArray[1]);
     clickedArray.pop();
     clickedArray.pop();
   }
+  }, 1000)
+  
 }
 // ** 참고 **
 // 화면 띄우는 함수들 시작
@@ -117,17 +123,17 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 }
 
 function flipBack(cardClassNumber) {
-  let cardClass = '.' + cardClassNumber;
-  console.log(cardClass);  //
-  let toBeFlipped = document.getElementsByClassName(cardClass);
-  console.log(toBeFlipped[0]);
+  let toBeFlipped = document.getElementsByClassName(cardClassNumber);
+  setTimeout(function(){
+    for(let i = 0; i < 2; i++) {  // class이름이 같은 요소가 2개라서
+  toBeFlipped[i].style.animationName = "cardBack";  
+  toBeFlipped[i].style.aniamtionDuration = "1s";
+  }
+  }, 1000)
 
-  toBeFlipped[0].style.animationName = "cardBack";  //toBeFlipped[0]가 undefined인 오류 발생
-  toBeFlipped[0].style.aniamtionDuration = "1s";
-}
-
-function flipFront() {
-  
 }
 
 Game(4, 1);
+
+// setTimeout : checkans앞에 넣어서 굳이 두번 쓰게 만들 필요 없음
+// 시간 설정 가능 하게 만들기
