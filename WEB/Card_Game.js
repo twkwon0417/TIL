@@ -49,7 +49,7 @@ function checkAns () {
       console.log("Done");
     } 
   } else {
-    flipBack();
+    flipBack(clickedArray[0]);
     clickedArray.pop();
     clickedArray.pop();
   }
@@ -79,7 +79,7 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   cardBorder.appendChild(cardValue);
   
   cardBorder.addEventListener('click', function() {
-    flipFront();
+    flipBack(number);
     clickedArray.push(number);
     if(clickedArray.length == 2) {
       checkAns();
@@ -109,8 +109,13 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 	}
 }
 
-function flipBack() {
-  
+function flipBack(cardClassNumber) {
+  let cardClass = '.' + cardClassNumber;
+  let toBeFlipped = document.getElementsByClassName(cardClass);
+  for(let i = 0; i < 2; i++) {
+    toBeFlipped[i].style.animationName = "cardBack";
+    toBeFlipped[i].style.aniamtionDuration = "1s";
+  }
 }
 
 function flipFront() {
