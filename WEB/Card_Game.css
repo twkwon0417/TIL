@@ -1,13 +1,12 @@
-.card {
-  background-color: blue;
-  width: 20px;
-  height: 30px;
-  color: red;
-  text-align: center;
-  line-height: 30px;
-  margin: 2px;
-  display: inline-block;
-  position: relative;
-  border-style: solid;
-  border-color: green;
+@keyframes cardBack {
+  from {
+    color: blue;
+    perspective: 20px;
+    transform: rotateY(0deg);
+  }
+  to {
+    color: red;
+    perspective: 20px;
+    transform: rotateY(180deg);
+  }
 }
