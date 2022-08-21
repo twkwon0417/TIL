@@ -1,12 +1,26 @@
-@keyframes cardBack {
+@keyframes cardFront {
   from {
     color: blue;
     perspective: 20px;
-    transform: rotateY(0deg);
+    transform: rotateY(180deg);
   }
   to {
     color: red;
     perspective: 20px;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes cardBack {
+  from {
+    color: red;
+    perspective: 20px;
+    transform: rotateY(0deg);
+  }
+  to {
+    color: blue;
+    perspective: 20px;
     transform: rotateY(180deg);
   }
 }
+
