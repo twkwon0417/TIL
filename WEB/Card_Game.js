@@ -78,8 +78,12 @@ function addCard(number) {	// 카드 객체를 만드는 함수 : number가 적�
   let cardValue = document.createTextNode(number);
   cardBorder.appendChild(cardValue);
   
-  cardBorder.addEventListener('click', function() {
-    flipBack(number);
+  cardBorder.addEventListener('click', function(event) {
+    let clickedCard = event.currentTarget;
+    
+    clickedCard.style.animationDuration = "1s";
+    clickedCard.style.animationName = "cardBack";
+    clickedCard.style.animationFillMode = "forwards";
     clickedArray.push(number);
     if(clickedArray.length == 2) {
       checkAns();
@@ -109,13 +113,14 @@ function displayFullCards(side, assignTable) { // 위 두 함수를 이용해서
 	}
 }
 
-function flipBack(cardClassNumber) {
-  let cardClass = '.' + cardClassNumber;
-  let toBeFlipped = document.getElementsByClassName(cardClass);
-  for(let i = 0; i < 2; i++) {
-    toBeFlipped[i].style.animationName = "cardBack";
-    toBeFlipped[i].style.aniamtionDuration = "1s";
-  }
+// function flipBack(cardClassNumber) {
+//   let cardClass = '.' + cardClassNumber;
+//   console.log(cardClass);  //
+//   let toBeFlipped = document.getElementsByClassName(cardClass);
+//   console.log(toBeFlipped[0]);
+
+//   toBeFlipped[0].style.animationName = "cardBack";
+//   toBeFlipped[0].style.aniamtionDuration = "1s";
 }
 
 function flipFront() {
@@ -126,4 +131,4 @@ function flipBackAll(second) {
   
 }
 
-Game(3, 1);
+Game(4, 1);
