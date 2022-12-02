@@ -19,7 +19,7 @@
 
 #### JS의 객체는 어떻게 구성되어 있는가?
 - key값과 value를 여러개 가지고 있는 꼴로 
-- ~~~
+~~~
   const obj = {
   a: 'Dip2K',
   b: 30,
@@ -27,9 +27,9 @@
   d: {}
 };
 
-console.log(Object.keys(obj)); 
-// Array ["a", "b", "c", "d"]
+  console.log(Object.keys(obj)); 
+  // Array ["a", "b", "c", "d"]
 
-console.log(Object.values(obj)); 
-// Array ["Dip2K", 30, true, Object {  }]
-  ~~~
+  console.log(Object.values(obj)); 
+  // Array ["Dip2K", 30, true, Object {  }]
+~~~
