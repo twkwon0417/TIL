@@ -18,7 +18,8 @@
 - JavaScript Object Model 참고
 
 #### JS의 객체는 어떻게 구성되어 있는가?
-- key값과 value를 여러개 가지고 있는 꼴로 
+- key값과 value를 여러개 가지고 있는 꼴로 구성
+- 객체 안에서 key를 []로 감싸면 그 안에 넣은 레퍼런스가 가르키는 실제값이 key값으로 사용된다.
 ~~~
   const obj = {
   a: 'Dip2K',
@@ -32,4 +33,8 @@
 
   console.log(Object.values(obj)); 
   // Array ["Dip2K", 30, true, Object {  }]
+~~~
+
+~~~
+[e.target.name]: e.target.value
 ~~~
