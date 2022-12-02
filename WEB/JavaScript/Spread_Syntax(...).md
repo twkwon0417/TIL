@@ -1,0 +1,2 @@
+- https://blog.naver.com/PostView.naver?blogId=zoz0312&logNo=221622159150&redirect=Dlog&widgetTypeCall=true&directAccess=false
+- https://velog.io/@bigbrothershin/JavaScript-%ED%95%A8%EC%88%98-%EC%8B%AC%ED%99%94-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98%EC%99%80-%EC%A0%84%EA%B0%9C-%EC%97%B0%EC%82%B0%EC%9E%90
