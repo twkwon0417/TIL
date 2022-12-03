@@ -15,6 +15,15 @@ console.log(age);
 // Tony
 // 21
 ~~~
+
+~~~
+const {scrollHeight, clientHeight} = this.box;
+/* 다음 주석과 같은 의미이다
+   const scrollHeight = this.box.scrollHeight;
+   const clientHeight = this.box.clientHeight;
+*/
+~~~
+
 #### 함수 parameter에서도 사용 가능
 ~~~
 const Me = {
