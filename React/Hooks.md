@@ -42,8 +42,8 @@
     const refName = useRef(); //  Otional Parameter은 .current 값의 기본값, 수정 할때에는 .current 값을 수정, 조회 할 때에는 .current 를 조회하면 됩니다.
     ~~~
     
-- **useRef()** : 함수형 Component에서 굳이 리렌더링 하지 않고 초기화되지 않는 값을 관리하고 싶을 때 사용 할 수도 있다.
-  - How useRef used as local variable? : <a href="https://stackoverflow.com/questions/57444154/why-need-useref-and-not-mutable-variable" target="_blank">Stackoverflow 링크</a>
+- **useRef(2)** : 함수형 Component에서 굳이 값이 바뀌어도 리렌더링 하지않을 값을 관리하고 싶을 때 사용 할 수도 있다.
+  - 굳이 왜 useRef를 사용할까? : <a href="https://stackoverflow.com/questions/57444154/why-need-useref-and-not-mutable-variable" target="_blank">Stackoverflow 링크</a>
 
   - ~~~
     const nextId = useRef(4); // parameter은 
