@@ -1,5 +1,9 @@
 # JavaScipt Basic
 
+#### How JS Work
+- **Single Thread** : 위에서 아래로 차근차근
+- **synchronous** : 동기적인 (중간에 시간 오래 걸리는게 있어도 기다리지 않고 바로 다음 라인으로)
+
 #### How to connect js
 - ##### Inside HTML file
 - - `</body>` 직전에 `<script> ~ </script>` 안에 삽입
