@@ -18,3 +18,13 @@
 ### <a href="http://boj.kr/44cd967ebbd649569575e07cbf757e6a" target="_blank"> BOJ 1436</a>
 - **완전탐색** : 먼저 무식하게 풀 수 있는지 확인하고 무식 하게 풀기
 - **str.find()** : **숫자를 string으로 바꿔서** find 함수 사용하기
+
+### <a href="http://boj.kr/d47c7b0f3ea84d2894ea695b413be306" target="_blank"> BOJ 1068</a>
+- **Edge case** 생각하기
+
+### <a href="http://boj.kr/0f8ac21b53224ae298320f764e15d6b1" target="_blank"> BOJ 1325</a>
+- **visited 배열 초기화**
+
+### <a href="http://boj.kr/097f9325347243d1a6bfa9058bf56ca8" target="_blank"> BOJ 17298</a>
+- **index 처리** : http://boj.kr/9270b97aae224481a0ad26b2bcff289a 이런 방법도 있다.
+- **stack**의 응용
