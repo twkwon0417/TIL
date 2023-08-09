@@ -1,50 +1,74 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, ls[20][20], temp[20][20];
+int n, m, k, ls[50][50], ori[50][50], ans = 987654321;
+vector<tuple<int, int, int>> v;
+vector<int> sol_v;
 
-void r_check(int x){
-    memset(temp, 0, sizeof(temp));
+int getAns(){
+    int ret = 987654321;
     for(int i = 0; i < n; i++){
-        stack<pair<int, int>> stk;
-        for(int j = 0; j < n; j++){
-            int temp_j = j;
-            // if(j == 0){
-            //     if(x == 0) stk.push(ls[i][n - 1]);
-            //     else stk.push(ls[i][j]);
-            //     continue;
-            // }
-            if(x == 0) j = n - 1 - j;
-            if(stk.size() && !stk.top().second && stk.top().first == ls[i][j]){
-                stk.pop();
-                stk.push({ls[i][j] * 2, 1});
-            }
-            else stk.push({ls[i][j], 0});
-            j = temp_j;
+        int temp = 0;
+        for(int j = 0; j < m; j++){
+            temp += ls[i][j];
         }
-        int cnt = stk.size();
-        for(int j = 0; j < cnt; j++){
-            int temp_j = j;
-            if(x == 0) j = 2 * cnt - n - j - 1;
-            // cout << cnt - 1 - j << " ";
-            temp[i][cnt - 1 - j] = stk.top().first;
-            stk.pop();
-            j = temp_j;
+        ret = min(ret, temp);
+    }
+    return ret;
+}
+
+void rotate(int r, int c, int s){
+    int temp[50][50];
+    copy(&ls[0][0], &ls[0][0] + 250, &temp[0][0]);
+    for(int i = r - s - 1; i <= r + s - 1; i++){
+        for(int j = c - s - 1; j <= c + s - 1; j++){
+            temp[i][j] = ls[n - j - 1][i];
         }
     }
+    copy(&temp[0][0], &temp[0][0] + 250, &ls[0][0]);
+}
+
+void solve(int com){
+    if(sol_v.size() == k){
+        for(int x : sol_v){
+            int a, b, c;
+            tie(a, b, c) = v[x];
+            rotate(a, b, c);
+        }
+        int temp = getAns();
+        ans = min(ans, temp);
+        copy(&ori[0][0], &ori[0][0] + 250, &ls[0][0]);
+        return;
+    }
+    for(int i = com + 1; i < k; i++){
+        sol_v.push_back(i);
+        solve(i);
+        sol_v.pop_back();
+    }
+    return;
 }
 
 int main(){
-    cin >> n;
+    cin >> n >> m >> k;
+    
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cin >> ls[i][j];
-        }
+        for(int j = 0; j < m; j++) cin >> ori[i][j];
     }
-    r_check(0);
+    copy(&ori[0][0], &ori[0][0] + 250, &ls[0][0]);
+    for(int i = 0; i < k; i++){
+        int a, b, c;
+        cin >> a >> b >> c;
+        v.push_back({a, b, c});
+    }
+    // solve(-1);
+    // cout << ans;
+    
+    // debug
+    rotate(2, 3, 1);
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++) cout << temp[i][j] << " ";
+        for(int j = 0; j < m; j++){
+            cout << ls[i][j] << " ";
+        }
         cout << "\n";
     }
-    
 }
