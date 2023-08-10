@@ -1,74 +1,104 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m, k, ls[50][50], ori[50][50], ans = 987654321;
-vector<tuple<int, int, int>> v;
-vector<int> sol_v;
+int n, k, ls[1000][8], r[1000][2], ans;
+string str;
 
-int getAns(){
-    int ret = 987654321;
-    for(int i = 0; i < n; i++){
-        int temp = 0;
-        for(int j = 0; j < m; j++){
-            temp += ls[i][j];
-        }
-        ret = min(ret, temp);
+void rotate_tape(int tape, int way){
+    int ttemp[8];
+    for(int i = 0; i < 8; i++){
+        ttemp[i] = ls[tape][i];
     }
-    return ret;
+    if(way = 1){
+        int temp = ls[tape][7];
+        for(int i = 0; i < 7; i++){
+            ls[tape][i + 1] = ttemp[i];
+        }
+        ls[tape][0] = temp;
+    }
+    else{
+        int temp = ls[tape][0];
+        for(int i = 7; i >= 1; i--){
+            ls[tape][i - 1] = ttemp[i]; 
+        }
+        ls[tape][7] = temp;
+    }
 }
 
-void rotate(int r, int c, int s){
-    int temp[50][50];
-    copy(&ls[0][0], &ls[0][0] + 250, &temp[0][0]);
-    for(int i = r - s - 1; i <= r + s - 1; i++){
-        for(int j = c - s - 1; j <= c + s - 1; j++){
-            temp[i][j] = ls[n - j - 1][i];
+void solve(int a, int way){
+    int ori_way = way;
+    vector<int> v;
+    int tape = a - 1;
+    int mag = ls[tape][6];
+    int mag_r = ls[tape][2];
+    for(int i = tape - 1; i >= 0; i--){    // left check;
+        if(mag != ls[i][2]){
+            v.push_back(i);
+            mag = ls[i][6];
         }
+        else break;
     }
-    copy(&temp[0][0], &temp[0][0] + 250, &ls[0][0]);
-}
-
-void solve(int com){
-    if(sol_v.size() == k){
-        for(int x : sol_v){
-            int a, b, c;
-            tie(a, b, c) = v[x];
-            rotate(a, b, c);
+    rotate_tape(tape, way);
+    for(int i : v){
+        way = -way;
+        rotate_tape(i, way);
+    }
+    
+    v.clear();
+    for(int i = tape + 1; i < n; i++){    // right check;
+        if(mag_r != ls[i][6]){
+            v.push_back(i);
+            mag_r = ls[i][2];
         }
-        int temp = getAns();
-        ans = min(ans, temp);
-        copy(&ori[0][0], &ori[0][0] + 250, &ls[0][0]);
-        return;
+        else break;
     }
-    for(int i = com + 1; i < k; i++){
-        sol_v.push_back(i);
-        solve(i);
-        sol_v.pop_back();
+    // rotate_tape(tape, way);
+    for(int i : v){
+        way = -ori_way;
+        rotate_tape(i, way);
     }
-    return;
-}
-
-int main(){
-    cin >> n >> m >> k;
+    
     
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++) cin >> ori[i][j];
-    }
-    copy(&ori[0][0], &ori[0][0] + 250, &ls[0][0]);
-    for(int i = 0; i < k; i++){
-        int a, b, c;
-        cin >> a >> b >> c;
-        v.push_back({a, b, c});
-    }
-    // solve(-1);
-    // cout << ans;
-    
-    // debug
-    rotate(2, 3, 1);
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
+        for(int j = 0; j < 8; j++){
             cout << ls[i][j] << " ";
         }
         cout << "\n";
     }
+    cout << "\n";
+    
+    
+}
+
+int main(){
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        cin >> str;
+        for(int j = 0; j < 8; j++){
+            ls[i][j] = str[j] - '0';
+        }
+    }
+    
+    
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < 8; j++){
+            cout << ls[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";
+    
+    
+    cin >> k;
+    for(int i = 0; i < k; i++){
+        cin >> r[i][0] >> r[i][1];
+    }
+    
+    for(int i = 0; i < k; i++){
+        solve(r[i][0], r[i][1]);
+    }
+    for(int i = 0; i < n; i++){
+        if(ls[i][0]) ans++;
+    }
+    cout << ans;
 }
