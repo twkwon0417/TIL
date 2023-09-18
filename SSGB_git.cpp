@@ -1,108 +1,81 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-    // 흰 : 엎고 ㄱ
-    // 빨 : 엎은 상태로 오면 온 친구들만 반대로 정렬
-    // 파 : 이동방향 reverse & 한칸만 이동, 만약 뒤 한칸도 파랑 -> 가만히
-    // 행, 열, 이동방향 0 ~ 3 오, 왼, 위, 아래
-int n, k, ls[13][13], ret;
-vector<pair<int, int>> mal[13][13];    //번호, 이동 방향
-
+#include<bits/stdc++.h>
+using namespace std; 
+int n, k, a[14][14], y, x, dir;
+struct Point{
+    int y, x, dir;
+}; 
+vector<int> v[14][14];
+vector<Point> status;
+const int dy[] = {0, 0, -1, 1};
+const int dx[] = {1, -1, 0, 0};  
+void move(int y, int x, int dir, int i){
+    int ny = y + dy[dir];
+    int nx = x + dx[dir];
+    if(ny < 0 || ny >= n || nx < 0 || nx >= n || a[ny][nx] == 2){
+        status[i].dir ^= 1;  
+        ny = y + dy[status[i].dir]; 
+        nx = x + dx[status[i].dir];
+        if (ny < 0 || ny >= n || nx < 0 || nx >= n || a[ny][nx] == 2) return; 
+    }
+	// 한칸이동 로직
+    vector<int> &here_v = v[y][x];
+    vector<int> &next_v = v[ny][nx];
+    auto pos = find(here_v.begin(), here_v.end(), i); 
+	// 뒤집어서 보내기
+    if(a[ny][nx] == 1) reverse(pos, here_v.end()); 
+	for(auto it = pos; it != here_v.end(); it++){
+        next_v.push_back(*it); 
+        status[*it].y = ny; 
+        status[*it].x = nx;  
+    }
+    here_v.erase(pos, here_v.end()); 
+    return;   
+}
+bool isOver(){   
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){ 
+            if(v[i][j].size() >= 4){
+                return 1;  
+            }
+        } 
+    }
+    return 0;
+}
+bool simul(){
+    for(int i = 0; i < status.size(); i++){ 
+        int y = status[i].y;
+        int x = status[i].x;
+        int dir = status[i].dir;
+        move(y, x, dir, i); 
+        if(isOver()) return 1; 
+    } 
+    return 0;
+}
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
     cin >> n >> k;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            cin >> ls[i][j];
+            cin >> a[i][j];
         }
     }
-    int a, b, c;
     for(int i = 0; i < k; i++){
-        cin >> a >> b >> c;
-        mal[a - 1][b - 1].push_back(i + 1, c - 1);
+        cin >> y >> x >> dir; y--; x--; dir--;
+        v[y][x].push_back(i);
+        status.push_back({y, x, dir});
     }
-    
-    while(ret <= 1000){ // 처음 친구만 계산하고 업힌애랑 안 업힌해 구분해서 별도의 벡터에 넣어
-        for(int ffind = 1; ffind <= k; ffind++){    // 계산 값 위치에mal[ny][nx]에 push_back
-            for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
-                    if(!mal[i][j].size()) continue;
-                    pair<int, int> flag = {-1, -1};   // 이동방향, 말 번호
-                    bool red = false;
-                    vector<pair<int, int>> no_temp;    // 안 이동한 친구들
-                    for(auto pawn : mal[i][j]){
-                        if(pawn == ffind){
-                            if(flag.first){// 뒤에 친구들 해결
-                                
-                            }
-                            if(pawn.second == -1){    // 오, 왼
-                                if(j + pawn.first >= n){
-                                    blue(); // 새로운 위치에 push_back해줄것임
-                                }
-                                else{
-                                    if(ls[i][j + pawn.first] == 0){  // 흰 빨 파
-                                        white();
-                                    }
-                                    else if(ls[i][j + pawn.first] == 1){
-                                        red();
-                                        red = true;
-                                    }
-                                    else blue();
-                                }
-                            }
-                            else if(pawn.second == 1){             
-                                if(j - pawn.first < 0){
-                                    blue();
-                                }
-                                else{
-                                    if(ls[i][j - pawn.first] == 0){  // 흰 빨 파
-                                        white();
-                                    }
-                                    else if(ls[i][j - pawn.first] == 1){
-                                        red();
-                                        red = true;
-                                    }
-                                    else blue();
-                                }
-                            }
-                            else if(pawn.second == 2){      // 위, 아래
-                                if(i - pawn.first < 0){
-                                    blue();
-                                }
-                                else{
-                                    if(ls[i - pawn.first][j] == 0){  // 흰 빨 파
-                                        white();
-                                    }
-                                    else if(ls[i - pawn.first][j] == 1){
-                                        red();
-                                        red = true;
-                                    }
-                                    else blue();
-                                }
-                            }
-                            else{
-                                if(i + pawn.first >= n){
-                                    blue();
-                                }
-                                else{
-                                    if(ls[i + pawn.first][j] == 0){  // 흰 빨 파
-                                        white();
-                                    }
-                                    else if(ls[i + pawn.first][j] == 1){
-                                        red();
-                                        red = true;
-                                    }
-                                    else blue();
-                                }
-                            }
-                            flag = 
-                        }
-                        else{
-                            temp.push_back({mal[i][j].first, mal[i][j].second});
-                        }
-                    }
-                    mal[i][j] = no_temp;
-                }
-            }
+
+    int cnt = 0;
+    bool flag = 0;
+    while(cnt <= 1000){
+        cnt++;
+        if(simul()){
+            flag = 1; 
+			break;
         }
     }
+    if(flag) cout << cnt << "\n";
+    else cout << -1 << "\n";
+    return 0;
 }
