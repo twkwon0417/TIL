@@ -4,8 +4,8 @@ Modern Java In Action
 
 책 내용
 ---------
-1. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Ch.2.md" target="_blank"> Behavior Parameterization </a>
-2. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Ch3_Lambda.md" target="_blank"> Lambda </a>
+1. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Ch.2.md" target="_blank"> Ch.02 | Behavior Parameterization </a>
+2. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Ch3_Lambda.md" target="_blank"> Ch.03 | Lambda </a>
 
 추가적으로 공부한 것들
 ------------------
