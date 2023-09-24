@@ -41,7 +41,52 @@ public interface Predicate<T>{
 - **Function Descriptor** : lambda 표현식의 signature울 서술하는 메서드
 - **Remind** : **함수형 인터페이스를 인수로 받는 메서드에만** 람다 표현식 사용할 수 있다.
 
-> **try - with- resource**
+형식 검사, 형식 추론, 제약
+---------------------------
+- **형식 검사** : 람다가 사용되는 context를 이용해서 **람다의 type을 추론 할수 있다.**
+- 대상 형식(target type) : 어떤 context에서 기대되는 람다 표현식의 형식 
+
+// 여기서 부터 시작 입니다~
+
+
+> **try - with- resources 구문**
+> ~~~ java
+> // Java 7 이전, try - catch - finally 구문에서 자원 해제하기
+> public static void main(String args[]) throws IOException {
+>    FileInputStream is = null;
+>    BufferedInputStream bis = null;
+>    try {
+>        is = new FileInputStream("file.txt");
+>        bis = new BufferedInputStream(is);
+>        int data = -1;
+>        while((data = bis.read()) != -1){
+>            System.out.print((char) data);
+>        }
+>    } finally {
+>        // close resources
+>        if (is != null) is.close();
+>        if (bis != null) bis.close();
+>    }
+>}
+> 
+> ~~~ java
+> // Java 7 이후, try - with - resources 구문
+> public static void main(String args[]) {
+>    try (
+>        FileInputStream is = new FileInputStream("file.txt");
+>        BufferedInputStream bis = new BufferedInputStream(is)
+>    ) {
+>        int data = -1;
+>        while ((data = bis.read()) != -1) {
+>            System.out.print((char) data);
+>        }
+>    } catch (IOException e) {
+>        e.printStackTrace();
+>    }
+>}
+> ~~~
+> 
+> - **AutoCloseable 인터페이스를 구현한 객체들을 finally에서 close 해준다.**
+> 출저 : https://codechacha.com/ko/java-try-with-resources/
 
 https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EB%B3%B4%EB%8A%94-%EC%9E%90%EB%B0%94-%EC%BD%94%EB%93%9C%EC%9D%98-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%98%81%EC%97%AD%EC%8A%A4%ED%83%9D-%ED%9E%99
-https://codechacha.com/ko/java-try-with-resources/
