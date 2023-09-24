@@ -133,15 +133,83 @@ System.out:println(s)
 Supplier<Apple> c1 = Apple::new;
 Apple a1 = c1.get();
 
-Function<Interger, Apple> c2 = Apple::new;
+Function<Integer, Apple> c2 = Apple::new;
 Apple a2 = c2.apply(110);
+
+BiFunction<Color, Integer, Apple> c3 = Apple::new;
+Apple a3 = c3.apply(GREEN, 110);
 
 // 위 코드의 의미는
-Supplier<Apple> c1 = () -> new Apple();
+Supplier<Apple> c1 = () -> new Apple();    // 생성자 참조
 Apple a1 = c1.get();
 
-Function<Interger, Apple> c1 = (weight) -> new Apple(weight);
+Function<Integer, Apple> c1 = (weight) -> new Apple(weight);
 Apple a2 = c2.apply(110);
+
+BiFunction<Color, Integer, Apple> c3 = new Apple(color, weight);
+Apple a3 = c3.apply(GREEN, 110);
+~~~
+
+~~~ java
+// 활용
+static Map<String, Function<Integer, Fruit>> map = new HashMap<>();
+static{
+    map.put("apple, Apple::new);
+    map.put("orange", Orange::new);
+// ...
+}
+
+public static Fruit giveMeFruit(string fruit, Integer weight){
+    return map.get(fruit.toLowerCase())
+              .apply(weight);
+}
+~~~
+
+> <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Static.md" target="_blank"> static이란? 올바른 사용법 & 다양한 의미 </a>
+
+람다 표현식을 조합할 수 있는 메서드
+-------------------------------
+- Functial Interface는 하나의 추상 메서드 밖에 가지지 못 하는데??? <br> **defult method**가 있잖아
+1. **Comparator** 조합
+    - **.reversed()** : 주어진 비교자의 순서를 뒤바꾸는 default method
+    - **.thenComparing** : 앞에서의 comparator로 비교했을때 같을 경우 두번째 comparator 지정해는 default method
+    - ~~~ java
+      // .reversed()
+      inventory.sort(comparing(Apple::getWeight).reversed());
+      // .thenComparing
+      inventory.sort(comparing(Apple::getWeight)
+               .reversed()
+               .thenComparing(Apple::getCountry));
+      ~~~
+2. **Predicate** 조합
+    - **.negate()** : 프리티케이트를 반전 시킴
+    - **.and()** : && for Predicate
+    - **.or()** : || for Predicate
+    - ~~~ java
+      Predicate<Apple> redApple = (a1) -> a1.getColor == RED;
+
+      // .negate() : red apple이 아닌 경우에 true 반환
+      Predicate<Apple> notRedApple = redApple.negate();
+      // .and()
+      Predicate<Apple> redAndHeavyApple =
+      redApple.and(apple -> apple.getWeight() > 150);
+      // .or()
+      Predicate<Apple> redAndHeavyAppleOrGreen =
+      redApple.and(apple -> apple.getWeight() > 150);
+              .or(apple -> GREEN.equals(a.getColor()));
+      ~~~
+
+3. **Function** 조합
+    - **.andThen()** : 주어진 함수를 먼저 적용한 결과를 다른 함수의 입력으로 전달하는 함수를 반환
+    - **.compose()** : 인수로 주어진 함수를 먼저 실행한 다음에 그 결과를 외부함수의 인수로 전달
+    - ~~~ java
+      Function<Integer, Integer> f = x -> x + 1;
+      Function<Integer, Integer> g = x -> x * 2;
+      Function<Integer, Integer> h1 = f.andThen(g);    // g(f(x))
+      Function<Integer, Integer> h2 = f.compose(g);    // f(g(x))
+
+      int result1 = h1.apply(1);    // return 4, g(f(x))
+      int result2 = h2.apply(1);    // return 3, f(g(x))
 
 
 > **try - with- resources 구문**
