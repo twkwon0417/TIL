@@ -10,4 +10,5 @@ Modern Java In Action
 추가적으로 공부한 것들
 ------------------
 1. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/%3CGeneric%3E.md" target="_blank"> Generic </a>
-2. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Static.md" target="_blank"> Static </a>
+2. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Stack%26Heap.md" target="_blank"> Stack & Heap </a>
+3. <a href="https://github.com/twkwon0417/TIL/blob/main/Book/ModernJavaInAction/Static.md" target="_blank"> Static </a>
