@@ -1,0 +1,3 @@
+- dto : https://tecoble.techcourse.co.kr/post/2021-04-25-dto-layer-scope/
+- static vs instance : https://dkswnkk.tistory.com/444
+- MVC model : https://tecoble.techcourse.co.kr/post/2021-04-26-mvc/
