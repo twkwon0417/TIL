@@ -53,8 +53,43 @@ Note here that he created a direct link between the separation of responsibiliti
 > - **각 계층들은 그 계층과 비슷한 역활을 하는 요소로 교체된다하더하도 애플리케이션은 계속 실행될수 있어야 한다.**
 > - 주로 같은 서버에서 실행 되겠지만, 각 계층을 다른 서버에서 돌리면 이점이 있을 수도 있다.
 
-bold되 있는 특징은 굉장히 많은 이점을 가지고 오지요
+bold되 있는 특징은 굉장히 많은 이점을 가지고 오지요 허허허
 
+애플리케이션이 어떻게 계층으로 나뉠수 있는가?
+------
+![Web Application](https://github.com/twkwon0417/TIL/assets/91003152/0849713b-404b-4352-993f-2546f9ea823e)
+- 애플리케이션은 HTML document를 주고 받으며 통해 웹 브라우져와 소통한다. 이러한 코드들을 비지니스 로직으로 부터 분리 할수 있다.
+- 애플리케이션이 데이터베이스와 SQL문을 주고 받으며 소통하는데, 이런 코드들을 비지니스 로직으로 부터 분리할 수 있다.
+
+레이러라고 부르려면 각 계층의 책임영역이 확실해야 하고, 그에 맞는 코드들이 계층에 들어가야 한다.
+1. Presentation Logic : 데이터을 보여주고 사용자의 입력값을 받는 유저 인터페이스 (SQL reponse, request)
+2. Business(domain) Logic : 데이터 검증, 비지니스 규칙, 특정 행동들을 관리한다.
+3. Data Access Logic : 데이터베이스와 소통한다. (SQL, api...etc)
+
+3 Tier Architecture : 규칙
+-----
+![3-tier-architecture request   response](https://github.com/twkwon0417/TIL/assets/91003152/634a588d-d70b-4992-a886-9761e0371388)
+
+- 각 계층의 코드들은 개별적으로 관리될 수 있게 분리된 파일에 있어야 한다.
+- 각 계층은 자기 계층에 맞는 코드만 있어야 한다.
+- Presentation Layer은 외부(user)로 부터 요청을 받거나 보낼수 있다.
+- Presentation Layer은 business layer에게 요청을 주거나 답을 받을수 있다. (vice versa)
+- Business Layer은 Data Access layer 에게 요청을 주거나 답을 받을수 있다. (vice versa)
+- 각 레이어들은 다른 레이어의 내부를 알고 있으면 안된다. (그러면 의존성이 생기게 된다)
+
+MVC랑 3-Tier architecture랑 같은 거 아닌가?
+-----
+![3-tier vs mvc](https://github.com/twkwon0417/TIL/assets/91003152/9edf9c72-560e-4ad1-9bf0-eda15bad95c8)
+![3tier vs mvc 2](https://github.com/twkwon0417/TIL/assets/91003152/1d7bd41c-ab6c-4f92-a28d-dde4e8c7c861)
+- 중요 차이 : MVC pattern은 business layer과 data access layer가 분리 되어 있지 않다.
+  - 이에 따라 controller가 db의 연결을 담당하고, model에서 데이터베이스 연결 객체를 만들어 필요할때 사용된다. 
+
+3 Tier Architecture가 주는 이점
+-----
+- 유연성 : 3가지 로직으로 분히 되어있어 변화에 유연하게 대처할수 있다.
+- 유지보수 : 한 계층의 요소를 변경해도 다른 계층엔 영향을 미치지 않아 유지보수가 쉬워 진다.
+- 재사용성 : 재사용 할수 있는 구성요소의 구현이 쉬워진다. (eg. Business Layer에 있는 한 요소가 여러 Presentation Layer 요소에서 사용 될수 있다.)
+- 확장성 : 여러 서버에 애플리캐이션의 요소들을 배분할수 있도록 하여 확장성이 커진다. 
 
 https://softwareengineering.stackexchange.com/questions/299836/difference-between-3-tier-architecture-and-mvc-model-view-controller-in-asp-n
 https://velog.io/@chlee4858/3-tier-vs-MVC
