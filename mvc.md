@@ -97,3 +97,4 @@ https://tjdtls690.github.io/studycontents/java/2023-04-24-service_layer/
 https://levelup.gitconnected.com/how-to-differentiate-business-and-service-layers-in-layered-architecture-912123b2ccf1
 
 https://learn.microsoft.com/en-us/answers/questions/833560/is-mvc-a-design-pattern-or-an-architectural-patter
+https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/what-is-model-and-viewmodel-in-mvc-pattern/
